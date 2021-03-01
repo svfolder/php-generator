@@ -390,9 +390,6 @@ final class ClassType
 	public function addMember($member): self
 	{
 		if ($member instanceof Method) {
-			if ($this->isInterface()) {
-				$member->setBody(null);
-			}
 
 			$this->methods[strtolower($member->getName())] = $member;
 
@@ -601,9 +598,7 @@ final class ClassType
 	public function addMethod(string $name): Method
 	{
 		$method = new Method($name);
-		if ($this->isInterface()) {
-			$method->setBody(null);
-		} else {
+		if (!$this->isInterface()) {
 			$method->setPublic();
 		}
 
