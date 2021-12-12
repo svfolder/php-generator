@@ -376,10 +376,7 @@ final class Extractor
 	}
 
 
-	/**
-	 * @param  GlobalFunction|Method  $function
-	 */
-	private function setupFunction($function, Node\FunctionLike $node): void
+	private function setupFunction(GlobalFunction|Method $function, Node\FunctionLike $node): void
 	{
 		$function->setReturnReference($node->returnsByRef());
 		$function->setReturnType($node->getReturnType() ? $this->toPhp($node->getReturnType()) : null);
@@ -402,7 +399,7 @@ final class Extractor
 	}
 
 
-	private function toPhp($value): string
+	private function toPhp(mixed $value): string
 	{
 		return $this->printer->prettyPrint([$value]);
 	}
